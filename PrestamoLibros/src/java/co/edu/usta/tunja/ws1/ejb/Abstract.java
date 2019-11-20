@@ -1,0 +1,44 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package co.edu.usta.tunja.ws1.ejb;
+
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+
+/**
+ *
+ * @author Maria Fernanda
+ */
+public abstract class Abstract<T> {
+    private final Class<T> entidad;
+    protected abstract EntityManager getAdmEntidad();
+    
+    public Abstract (Class<T> entidad){
+        this.entidad=entidad;
+    }
+    public void grabar(T entidad){
+        getAdmEntidad().persist(entidad);
+    }
+    public List<T> listar(){
+        CriteriaBuilder cb = getAdmEntidad().getCriteriaBuilder();
+        CriteriaQuery<T> cq=cb.createQuery(entidad);
+        cq.select(cq.from(entidad));
+        List<T> allData=getAdmEntidad().createQuery(cq).getResultList();
+        return allData;
+    }
+    public void borrar(T entidad){
+        getAdmEntidad().remove(getAdmEntidad().merge(entidad));
+    }
+    public void actualizar(T entidad){
+        getAdmEntidad().merge(entidad);
+    }
+    public T buscar(Object id){
+        return getAdmEntidad().find(entidad, id);
+        
+    }
+}
