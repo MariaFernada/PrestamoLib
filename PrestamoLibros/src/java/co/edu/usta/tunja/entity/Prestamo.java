@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.usta.tunja.edu.entity;
+package co.edu.usta.tunja.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -55,9 +55,6 @@ public class Prestamo implements Serializable {
     private Date fechaVencimiento;
     @JoinColumn(name = "id_estado_prestamo", referencedColumnName = "id_estado")
     @ManyToOne(optional = false)
-    private Estado idEstadoPrestamo;
-    @JoinColumn(name = "id_libro_prestamo", referencedColumnName = "id_libro")
-    @ManyToOne(optional = false)
     private Libro idLibroPrestamo;
     @JoinColumn(name = "codigo_persona_prestamo", referencedColumnName = "codigo")
     @ManyToOne(optional = false)
@@ -98,14 +95,6 @@ public class Prestamo implements Serializable {
 
     public void setFechaVencimiento(Date fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
-    }
-
-    public Estado getIdEstadoPrestamo() {
-        return idEstadoPrestamo;
-    }
-
-    public void setIdEstadoPrestamo(Estado idEstadoPrestamo) {
-        this.idEstadoPrestamo = idEstadoPrestamo;
     }
 
     public Libro getIdLibroPrestamo() {

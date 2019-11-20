@@ -1,0 +1,63 @@
+create table libro(
+     id_libro int AUTO_INCREMENT PRIMARY KEY,
+     titulo varchar(300) not null,
+     autor varchar(100) not null,
+     isbn varchar(13) not null,
+     genero varchar(100) not null
+    
+);
+
+CREATE table persona(
+   codigo int AUTO_INCREMENT not null primary KEY,
+   nombres varchar(100) not null,
+    documento varchar(15) not null,
+    telefono varchar(10) not null
+    
+   );
+   
+   CREATE table prestamo(
+   id_prestamo int AUTO_INCREMENT not null primary key,
+       fecha_inicial date not null,
+       fecha_vencimiento date not null,
+       estado_prestamo ENUM('vencido', 'no_vencido') not null,
+       estado_prestamo ENUM('vencido', 'no_vencido') not null,
+       id_libro_prestamo int not null,
+       codigo_persona_prestamo int not null,
+       id_estado_prestamo int not null
+   );
+   
+  
+ 
+
+alter table prestamo
+add CONSTRAINT FK_persona
+FOREIGN key (codigo_persona_prestamo)
+references persona(codigo)
+on update CASCADE
+on delete no ACTION;
+
+alter table prestamo
+add CONSTRAINT FK_libro
+FOREIGN key (id_libro_prestamo)
+references libro(id_libro)
+on update CASCADE
+on delete no ACTION;
+
+alter table prestamo
+add CONSTRAINT FK_estado
+FOREIGN key (id_estado_prestamo)
+references estado(id_estado)
+on update CASCADE
+on delete no ACTION;
+
+insert INTO estado(estado_prestamo )VALUES('vencido');
+insert INTO estado(estado_prestamo )VALUES('no_vencido');
+
+INSERT into libro(titulo,autor,isbn,genero) value('derecho constitucional','Varios','9789588692524','Ciencias sociales');
+INSERT into libro(titulo,autor,isbn,genero) value('fisica universitaria','Varios','9786073244398','Ciencias sociales');
+
+INSERT into persona(documento,nombres,telefono) value('1020815957','Laura Castillo','3017223229');
+INSERT into persona(documento,nombres,telefono) value('1022428027','Mafe Molina','3102613347');
+INSERT into persona(documento,nombres,telefono) value('1007226350','Ericka Sora','3146261113');
+
+INSERT into prestamo(id_libro_prestamo,id_estado_prestamo,codigo_persona_prestamo,fecha_inicial,fecha_vencimiento) values(1,2,1,'2019-11-17','2019-11-24');

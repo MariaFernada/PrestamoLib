@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.usta.tunja.ws1.ejb;
-
-import com.usta.tunja.edu.entity.Prestamo;
+package co.edu.usta.tunja.ejb;
+import co.edu.usta.tunja.entity.Persona;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,18 +12,19 @@ import javax.persistence.PersistenceContext;
  *
  * @author Maria Fernanda
  */
-public class PrestamoFacade extends Abstract<Prestamo>{
-     @PersistenceContext(unitName = "PrestamoLibrosPU")
+public class PersonaFacade extends Abstract<Persona> {
+
+    @PersistenceContext(unitName = "PrestamoLibrosPU")
     private EntityManager _em;
 
+   
     @Override
     protected EntityManager getAdmEntidad() {
         return this._em;
     }
 
-    public PrestamoFacade() {
-        super(Prestamo.class);
+    public PersonaFacade() {
+        super(Persona.class);
     }
 
-    
 }

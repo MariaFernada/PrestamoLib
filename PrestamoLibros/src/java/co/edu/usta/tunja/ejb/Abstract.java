@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.usta.tunja.ws1.ejb;
+package co.edu.usta.tunja.ejb;
 
 import java.util.List;
 import javax.persistence.EntityManager;
