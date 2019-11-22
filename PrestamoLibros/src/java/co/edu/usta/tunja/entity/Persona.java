@@ -139,7 +139,7 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "com.usta.tunja.edu.entity.Persona[ codigo=" + codigo + " ]";
+        return "co.edu.usta.tunja.entity.Persona[ codigo=" + codigo + " ]";
     }
     
 }

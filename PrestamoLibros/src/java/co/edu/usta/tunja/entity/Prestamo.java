@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -34,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Prestamo.findAll", query = "SELECT p FROM Prestamo p"),
     @NamedQuery(name = "Prestamo.findByIdPrestamo", query = "SELECT p FROM Prestamo p WHERE p.idPrestamo = :idPrestamo"),
     @NamedQuery(name = "Prestamo.findByFechaInicial", query = "SELECT p FROM Prestamo p WHERE p.fechaInicial = :fechaInicial"),
-    @NamedQuery(name = "Prestamo.findByFechaVencimiento", query = "SELECT p FROM Prestamo p WHERE p.fechaVencimiento = :fechaVencimiento")})
+    @NamedQuery(name = "Prestamo.findByFechaVencimiento", query = "SELECT p FROM Prestamo p WHERE p.fechaVencimiento = :fechaVencimiento"),
+    @NamedQuery(name = "Prestamo.findByEstadoPrestamo", query = "SELECT p FROM Prestamo p WHERE p.estadoPrestamo = :estadoPrestamo")})
 public class Prestamo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,7 +55,12 @@ public class Prestamo implements Serializable {
     @Column(name = "fecha_vencimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaVencimiento;
-    @JoinColumn(name = "id_estado_prestamo", referencedColumnName = "id_estado")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "estado_prestamo")
+    private String estadoPrestamo;
+    @JoinColumn(name = "id_libro_prestamo", referencedColumnName = "id_libro")
     @ManyToOne(optional = false)
     private Libro idLibroPrestamo;
     @JoinColumn(name = "codigo_persona_prestamo", referencedColumnName = "codigo")
@@ -67,10 +74,11 @@ public class Prestamo implements Serializable {
         this.idPrestamo = idPrestamo;
     }
 
-    public Prestamo(Integer idPrestamo, Date fechaInicial, Date fechaVencimiento) {
+    public Prestamo(Integer idPrestamo, Date fechaInicial, Date fechaVencimiento, String estadoPrestamo) {
         this.idPrestamo = idPrestamo;
         this.fechaInicial = fechaInicial;
         this.fechaVencimiento = fechaVencimiento;
+        this.estadoPrestamo = estadoPrestamo;
     }
 
     public Integer getIdPrestamo() {
@@ -95,6 +103,14 @@ public class Prestamo implements Serializable {
 
     public void setFechaVencimiento(Date fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
+    }
+
+    public String getEstadoPrestamo() {
+        return estadoPrestamo;
+    }
+
+    public void setEstadoPrestamo(String estadoPrestamo) {
+        this.estadoPrestamo = estadoPrestamo;
     }
 
     public Libro getIdLibroPrestamo() {
@@ -135,7 +151,7 @@ public class Prestamo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.usta.tunja.edu.entity.Prestamo[ idPrestamo=" + idPrestamo + " ]";
+        return "co.edu.usta.tunja.entity.Prestamo[ idPrestamo=" + idPrestamo + " ]";
     }
     
 }

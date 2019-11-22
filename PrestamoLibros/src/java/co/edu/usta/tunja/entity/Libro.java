@@ -154,7 +154,7 @@ public class Libro implements Serializable {
 
     @Override
     public String toString() {
-        return "com.usta.tunja.edu.entity.Libro[ idLibro=" + idLibro + " ]";
+        return "co.edu.usta.tunja.entity.Libro[ idLibro=" + idLibro + " ]";
     }
     
 }

@@ -50,8 +50,6 @@ references estado(id_estado)
 on update CASCADE
 on delete no ACTION;
 
-insert INTO estado(estado_prestamo )VALUES('vencido');
-insert INTO estado(estado_prestamo )VALUES('no_vencido');
 
 INSERT into libro(titulo,autor,isbn,genero) value('derecho constitucional','Varios','9789588692524','Ciencias sociales');
 INSERT into libro(titulo,autor,isbn,genero) value('fisica universitaria','Varios','9786073244398','Ciencias sociales');
